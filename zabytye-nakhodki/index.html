@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Забытые находки</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">Забытые<br>находки</div>
+  <nav>
+    <button class="active" data-page="cases">Кейсы</button>
+    <button data-page="collection">Коллекция</button>
+    <button data-page="inventory">Мои предметы</button>
+  </nav>
+  <div class="balance" id="balance"></div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="hero-text">
+      <p class="label">Архив · заброшенные места</p>
+      <h1>Вещи, которые остались после людей</h1>
+      <p>Открываешь кейс — получаешь предмет из конкретного места. У каждого предмета есть история, но узнаешь её, только когда найдёшь.</p>
+    </div>
+  </section>
+
+  <section class="page active" id="page-cases">
+    <div class="section-head"><h2>Места</h2><span class="muted">Демо · виртуальные кредиты</span></div>
+    <div class="case-grid" id="caseGrid"></div>
+  </section>
+
+  <section class="page" id="page-collection">
+    <div class="section-head"><h2>Коллекция</h2><span class="muted" id="collectionCount"></span></div>
+    <input class="search" id="collectionSearch" placeholder="Найти предмет">
+    <div id="collectionBody"></div>
+  </section>
+
+  <section class="page" id="page-inventory">
+    <div class="section-head"><h2>Мои предметы</h2><span class="muted" id="inventoryCount"></span></div>
+    <div class="toolbar">
+      <input class="search" id="inventorySearch" placeholder="Поиск в инвентаре">
+      <button class="btn ghost" id="sellDupes">Продать дубликаты</button>
+      <button class="btn ghost" id="sellAll">Продать всё</button>
+    </div>
+    <div class="item-grid" id="inventoryGrid"></div>
+  </section>
+</main>
+
+<footer>Все места, предметы и истории вымышлены. Кредиты виртуальные и хранятся только в этом браузере.</footer>
+
+<div class="backdrop" id="backdrop">
+  <div class="modal" role="dialog" aria-modal="true">
+    <div id="boxSpin" hidden>
+      <p class="label" id="spinCase"></p>
+      <div class="roll" id="rollWindow"><div class="track" id="track"></div></div>
+      <button class="btn ghost" id="skipBtn">Пропустить</button>
+    </div>
+    <div id="boxResult" hidden>
+      <p class="label" id="resCase"></p>
+      <div id="resThumb"></div>
+      <h2 id="resName"></h2>
+      <p class="rar" id="resRarity"></p>
+      <p class="story" id="resStory"></p>
+      <p class="muted" id="resChance"></p>
+      <div class="actions"><button class="btn ghost" id="resSell"></button><button class="btn" id="resClose">Забрать</button></div>
+    </div>
+    <div id="boxContents" hidden>
+      <h2 id="conTitle"></h2>
+      <p class="muted" id="conLead"></p>
+      <div id="conList"></div>
+      <div class="actions"><button class="btn" id="conOpen"></button><button class="btn ghost" id="conClose">Закрыть</button></div>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
