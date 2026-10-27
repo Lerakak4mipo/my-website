@@ -79,7 +79,7 @@ function renderInventory() {
 }
 function renderAll() {
   $("balance").textContent = money(state.balance) + " кр.";
-  renderCases(); renderCollection(); renderInventory(); save();
+  renderCases(); renderCollection(); renderInventory(); renderBonus(); save();
 }
 
 /* ---------- Окна ---------- */
@@ -162,6 +162,23 @@ function sellBulk(keepOne) {
   if (!confirm(`Продать предметов: ${sold.length} за ${money(sum)} кр.?`)) return;
   state.inventory = rest; state.balance += sum; renderAll(); toast(`Продано: ${sold.length} за ${money(sum)} кр.`);
 }
+
+/* ---------- Ежедневный бонус ---------- */
+const BONUS = 1500;
+const today = () => { const d = new Date(); return d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate(); };
+function renderBonus() {
+  const b = $("bonusBtn"), ready = state.lastBonus !== today();
+  b.disabled = !ready;
+  if (ready) { b.textContent = `Бонус дня +${money(BONUS)} кр.`; return; }
+  const n = new Date(), left = new Date(n.getFullYear(), n.getMonth(), n.getDate() + 1) - n;
+  b.textContent = `Следующий бонус через ${Math.floor(left / 36e5)} ч ${Math.floor(left % 36e5 / 6e4)} мин`;
+}
+$("bonusBtn").onclick = () => {
+  if (state.lastBonus === today()) return;
+  state.lastBonus = today(); state.balance += BONUS; renderAll();
+  toast(`Бонус дня: +${money(BONUS)} кр.`);
+};
+setInterval(renderBonus, 60000);
 
 /* ---------- События ---------- */
 document.addEventListener("click", e => {

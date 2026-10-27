@@ -17,6 +17,9 @@ nav button{background:none;border:0;border-bottom:2px solid transparent;padding:
 nav button:hover{color:var(--text)}
 nav button.active{color:var(--text);border-color:var(--rust)}
 .balance{font-size:15px;white-space:nowrap}
+.bonus{background:none;border-color:var(--rust);color:var(--text);padding:7px 12px;white-space:nowrap}
+.bonus:hover:not(:disabled){background:var(--rust)}
+.bonus:disabled{border-color:var(--line);color:var(--muted);cursor:default}
 
 main{max-width:1100px;margin:0 auto;padding:24px 20px 40px}
 .hero{min-height:340px;display:flex;align-items:center;justify-content:center;text-align:center;padding:40px 20px}
